@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TheLabs — Ecosistema de Transformación Humana</title>
+<meta name="description" content="TheLabs: ecosistema de laboratorios experienciales para convertir autoconocimiento, liderazgo, cultura y bienestar en capacidades organizacionales medibles.">
+<meta name="theme-color" content="#080c18">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+  :root {
+    --deep: #080c18;
+    --navy: #0d1630;
+    --surface: #111827;
+    --surface2: #1a2540;
+    --border: rgba(255,255,255,0.08);
+    --teal: #00d4b4;
+    --teal-dim: rgba(0,212,180,0.12);
+    --teal-mid: rgba(0,212,180,0.3);
+    --blue: #3b82f6;
+    --green: #10b981;
+    --purple: #8b5cf6;
+    --amber: #f59e0b;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --faint: #475569;
+    --white: #ffffff;
+
+    --inner: #3b82f6;
+    --inner-dim: rgba(59,130,246,0.15);
+    --lider: #8b5cf6;
+    --lider-dim: rgba(139,92,246,0.15);
+    --human: #10b981;
+    --human-dim: rgba(16,185,129,0.15);
+    --health: #f59e0b;
+    --health-dim: rgba(245,158,11,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px; width: 0%;
+    background: linear-gradient(90deg, var(--teal), var(--blue), var(--green));
+    z-index: 200;
+    box-shadow: 0 0 18px rgba(0,212,180,0.45);
+  }
+
+  .skip-link {
+    position: fixed; left: 1rem; top: -100px;
+    background: var(--teal); color: var(--deep);
+    padding: .6rem 1rem; border-radius: 8px;
+    z-index: 250; font-weight: 800; text-decoration: none;
+  }
+  .skip-link:focus { top: 1rem; }
+
+  .focus-visible, a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+    outline: 2px solid var(--teal); outline-offset: 3px;
+  }
+
+  /* ── NAV ────────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(8,12,24,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1.25rem;
+    color: var(--white);
+    letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--teal); color: var(--deep);
+    padding: 0.45rem 1.1rem; border-radius: 6px;
+    font-size: 0.8rem; font-weight: 700;
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px;
+  }
+  .hamburger span {
+    width: 22px; height: 2px; background: var(--text);
+    border-radius: 2px; transition: all 0.3s;
+  }
+  .mobile-menu {
+    display: none; position: fixed;
+    top: 60px; left: 0; right: 0;
+    background: var(--navy); z-index: 99;
+    padding: 1.5rem 2rem; flex-direction: column; gap: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .mobile-menu a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .mobile-menu.open { display: flex; }
+
+  /* ── HERO ───────────────────────────────────────────── */
+  #inicio {
+    min-height: 100vh; padding-top: 60px;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center; gap: 4rem;
+    padding-left: 6vw; padding-right: 4vw;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,212,180,0.05) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at 20% 80%, rgba(59,130,246,0.04) 0%, transparent 60%);
+  }
+  .hero-text { position: relative; z-index: 1; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--teal-dim); border: 1px solid var(--teal-mid);
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--teal); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .hero-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); }
+  .hero-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.8rem, 5vw, 4.2rem);
+    font-weight: 700; line-height: 1.05;
+    letter-spacing: -0.03em; color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+  .hero-title .accent { color: var(--teal); }
+  .hero-sub {
+    font-size: 1.05rem; color: var(--muted);
+    font-weight: 400; margin-bottom: 1.5rem;
+    max-width: 480px; line-height: 1.5;
+  }
+  .hero-desc {
+    font-size: 0.9rem; color: var(--faint);
+    max-width: 460px; line-height: 1.7;
+    border-left: 2px solid var(--teal-mid);
+    padding-left: 1rem; margin-bottom: 2.5rem;
+  }
+  .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--teal); color: var(--deep);
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-weight: 700; font-size: 0.9rem;
+    text-decoration: none; letter-spacing: 0.01em;
+    transition: opacity 0.2s, transform 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--text);
+    padding: 0.75rem 1.75rem; border-radius: 8px;
+    font-weight: 600; font-size: 0.9rem;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--teal); color: var(--teal); }
+
+  /* ── ORBITAL HERO ───────────────────────────────────── */
+  .hero-visual { position: relative; z-index: 1; height: 520px; }
+  .orbital-container {
+    position: relative; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .orbit-ring {
+    position: absolute; border-radius: 50%;
+    border: 1px solid var(--border);
+    animation: spin-slow linear infinite;
+  }
+  .orbit-ring-1 { width: 300px; height: 300px; animation-duration: 30s; }
+  .orbit-ring-2 { width: 440px; height: 440px; animation-duration: 50s; animation-direction: reverse; }
+  @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .core-node {
+    width: 100px; height: 100px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal), #00a896);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    box-shadow: 0 0 40px rgba(0,212,180,0.3), 0 0 80px rgba(0,212,180,0.1);
+    cursor: default; z-index: 2; position: relative;
+    animation: pulse-core 3s ease-in-out infinite;
+  }
+  @keyframes pulse-core {
+    0%, 100% { box-shadow: 0 0 40px rgba(0,212,180,0.3), 0 0 80px rgba(0,212,180,0.1); }
+    50% { box-shadow: 0 0 60px rgba(0,212,180,0.5), 0 0 120px rgba(0,212,180,0.15); }
+  }
+  .core-node span { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.8rem; color: var(--deep); }
+
+  .satellite {
+    position: absolute; width: 80px; height: 80px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    cursor: pointer; transition: transform 0.2s, box-shadow 0.3s;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 0.62rem;
+    text-align: center; line-height: 1.2; color: var(--white);
+    border: 1px solid rgba(255,255,255,0.1);
+    animation: pulse-node 4s ease-in-out infinite;
+  }
+  .satellite:hover { transform: scale(1.12); }
+  .satellite-inner {
+    background: linear-gradient(135deg, var(--inner), #2563eb);
+    box-shadow: 0 0 24px rgba(59,130,246,0.4);
+    top: 10px; left: 50%; margin-left: -40px;
+    animation-delay: 0s;
+  }
+  .satellite-lider {
+    background: linear-gradient(135deg, var(--lider), #7c3aed);
+    box-shadow: 0 0 24px rgba(139,92,246,0.4);
+    right: 10px; top: 50%; margin-top: -40px;
+    animation-delay: 1s;
+  }
+  .satellite-human {
+    background: linear-gradient(135deg, var(--human), #059669);
+    box-shadow: 0 0 24px rgba(16,185,129,0.4);
+    bottom: 10px; left: 50%; margin-left: -40px;
+    animation-delay: 2s;
+  }
+  .satellite-health {
+    background: linear-gradient(135deg, var(--health), #d97706);
+    box-shadow: 0 0 24px rgba(245,158,11,0.4);
+    left: 10px; top: 50%; margin-top: -40px;
+    animation-delay: 3s;
+  }
+  @keyframes pulse-node {
+    0%, 100% { opacity: 1; } 50% { opacity: 0.8; }
+  }
+  .sat-icon { font-size: 1.4rem; margin-bottom: 2px; }
+
+  /* connections */
+  .connections { position: absolute; inset: 0; pointer-events: none; }
+
+  /* ── SECTIONS GENERAL ───────────────────────────────── */
+  section { padding: 6rem 6vw; }
+  .section-label {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 700; letter-spacing: -0.02em; color: var(--white);
+    line-height: 1.15; margin-bottom: 1rem;
+  }
+  .section-desc { color: var(--muted); max-width: 560px; line-height: 1.7; }
+  .divider { height: 1px; background: var(--border); margin: 0 6vw; }
+
+  /* ── ECOSISTEMA INTERACTIVO ─────────────────────────── */
+  #ecosistema { background: var(--navy); }
+  .eco-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 4rem; align-items: start; margin-top: 3.5rem; }
+  .eco-map { position: relative; }
+
+  .eco-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .eco-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.5rem;
+    cursor: pointer; transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .eco-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: 14px 14px 0 0;
+    transition: opacity 0.25s;
+  }
+  .eco-card.inner::before { background: var(--inner); }
+  .eco-card.lider::before { background: var(--lider); }
+  .eco-card.human::before { background: var(--human); }
+  .eco-card.health::before { background: var(--health); }
+
+  .eco-card:hover, .eco-card.active {
+    border-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+  }
+  .eco-card.inner.active { border-color: var(--inner); background: var(--inner-dim); }
+  .eco-card.lider.active { border-color: var(--lider); background: var(--lider-dim); }
+  .eco-card.human.active { border-color: var(--human); background: var(--human-dim); }
+  .eco-card.health.active { border-color: var(--health); background: var(--health-dim); }
+
+  .eco-card-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+  .eco-card-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 1rem; color: var(--white); margin-bottom: 0.25rem;
+  }
+  .eco-card-cat { font-size: 0.75rem; color: var(--muted); }
+
+  .eco-center {
+    background: linear-gradient(135deg, var(--surface2), var(--surface));
+    border: 1px solid var(--teal-mid);
+    border-radius: 14px; padding: 1.25rem;
+    text-align: center; margin-bottom: 1rem;
+  }
+  .eco-center-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.3rem; font-weight: 700; color: var(--teal); margin-bottom: 0.3rem;
+  }
+  .eco-center-desc { font-size: 0.78rem; color: var(--muted); }
+
+  /* Detail panel */
+  .eco-detail {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    min-height: 500px;
+  }
+  .detail-empty {
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    height: 100%; min-height: 400px;
+    text-align: center; color: var(--faint);
+  }
+  .detail-empty .big { font-size: 3rem; margin-bottom: 1rem; }
+  .detail-content { animation: fadeUp 0.4s ease; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+
+  .detail-badge {
+    display: inline-block; font-size: 0.7rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.3rem 0.75rem; border-radius: 100px; margin-bottom: 1rem;
+  }
+  .detail-name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.8rem; font-weight: 700; color: var(--white);
+    margin-bottom: 0.5rem; letter-spacing: -0.02em;
+  }
+  .detail-purpose { color: var(--muted); margin-bottom: 1.5rem; line-height: 1.7; font-size: 0.92rem; }
+  .detail-section-title {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 0.6rem; margin-top: 1.25rem;
+  }
+  .detail-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .detail-pill {
+    background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+    padding: 0.3rem 0.7rem; border-radius: 100px;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .process-steps { counter-reset: step; display: flex; flex-direction: column; gap: 0.5rem; }
+  .process-step {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    font-size: 0.85rem; color: var(--text);
+  }
+  .step-num {
+    min-width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; font-weight: 700; flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .deliverable-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+  .deliverable-list li { font-size: 0.85rem; color: var(--text); display: flex; align-items: flex-start; gap: 0.5rem; }
+  .deliverable-list li::before { content: '→'; flex-shrink: 0; margin-top: 1px; }
+
+  /* ── MÉTODO ─────────────────────────────────────────── */
+  #metodo { background: var(--deep); }
+  .method-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .method-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem;
+  }
+  .method-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 1rem;
+  }
+  .method-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+  .method-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* LEADER */
+  .leader-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0.75rem; margin-top: 2rem; }
+  .leader-card {
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1.2rem 0.75rem;
+    text-align: center; transition: border-color 0.2s;
+  }
+  .leader-card:hover { border-color: var(--teal); }
+  .leader-letter {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; font-weight: 800; color: var(--teal);
+    line-height: 1; margin-bottom: 0.5rem;
+  }
+  .leader-word { font-size: 0.8rem; font-weight: 600; color: var(--white); margin-bottom: 0.4rem; }
+  .leader-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+  .leader-quote {
+    background: var(--teal-dim); border: 1px solid var(--teal-mid);
+    border-radius: 10px; padding: 1.25rem 1.5rem;
+    margin-top: 1.5rem; font-style: italic;
+    color: var(--teal); font-size: 0.95rem; text-align: center;
+  }
+
+  /* ── PROCESO ────────────────────────────────────────── */
+  #proceso { background: var(--navy); }
+  .process-flow { display: flex; gap: 0; margin-top: 3rem; overflow-x: auto; padding-bottom: 1rem; }
+  .flow-step {
+    flex: 1; min-width: 130px;
+    display: flex; flex-direction: column; align-items: center;
+    text-align: center; padding: 0 0.5rem; position: relative;
+  }
+  .flow-step:not(:last-child)::after {
+    content: '→'; position: absolute; right: -10px; top: 28px;
+    color: var(--faint); font-size: 1rem;
+  }
+  .flow-circle {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--surface); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; margin-bottom: 0.75rem;
+    transition: all 0.2s;
+  }
+  .flow-step:hover .flow-circle { border-color: var(--teal); background: var(--teal-dim); }
+  .flow-name { font-size: 0.8rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+  .flow-desc { font-size: 0.7rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── SOLUCIONES ─────────────────────────────────────── */
+  #soluciones { background: var(--deep); }
+  .solutions-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .sol-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    position: relative; overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .sol-card:hover { transform: translateY(-3px); }
+  .sol-card.inner:hover { border-color: var(--inner); }
+  .sol-card.lider:hover { border-color: var(--lider); }
+  .sol-card.human:hover { border-color: var(--human); }
+  .sol-card.health:hover { border-color: var(--health); }
+  .sol-stripe {
+    position: absolute; top: 0; left: 0; bottom: 0; width: 4px;
+    border-radius: 16px 0 0 16px;
+  }
+  .sol-card.inner .sol-stripe { background: var(--inner); }
+  .sol-card.lider .sol-stripe { background: var(--lider); }
+  .sol-card.human .sol-stripe { background: var(--human); }
+  .sol-card.health .sol-stripe { background: var(--health); }
+  .sol-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .sol-name { font-family: 'Space Grotesk', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--white); margin-bottom: 0.35rem; }
+  .sol-tagline { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-bottom: 1.25rem; line-height: 1.5; }
+  .sol-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.25rem; }
+  .sol-meta-item label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--faint); display: block; margin-bottom: 0.3rem; }
+  .sol-meta-item p { font-size: 0.8rem; color: var(--text); line-height: 1.5; }
+  .sol-results { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.5rem; }
+  .sol-result-tag {
+    font-size: 0.72rem; padding: 0.25rem 0.6rem; border-radius: 6px;
+    font-weight: 500;
+  }
+  .sol-card.inner .sol-result-tag { background: var(--inner-dim); color: var(--inner); }
+  .sol-card.lider .sol-result-tag { background: var(--lider-dim); color: var(--lider); }
+  .sol-card.human .sol-result-tag { background: var(--human-dim); color: var(--human); }
+  .sol-card.health .sol-result-tag { background: var(--health-dim); color: var(--health); }
+  .sol-btn {
+    border: 1px solid var(--border); background: transparent;
+    color: var(--text); padding: 0.55rem 1.1rem;
+    border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+  }
+  .sol-btn:hover { background: rgba(255,255,255,0.05); }
+
+  /* ── IMPACTO ────────────────────────────────────────── */
+  #impacto { background: var(--navy); }
+  .impact-levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .impact-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem;
+  }
+  .impact-level {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.75rem;
+  }
+  .impact-title { font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 1rem; }
+  .impact-items { display: flex; flex-direction: column; gap: 0.5rem; }
+  .impact-item {
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.85rem; color: var(--text);
+  }
+  .impact-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+
+  .indicators-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2.5rem; }
+  .indicator {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 1rem; text-align: center;
+  }
+  .indicator-icon { font-size: 1.4rem; margin-bottom: 0.4rem; }
+  .indicator-label { font-size: 0.72rem; color: var(--muted); line-height: 1.4; }
+
+  /* ── DIFERENCIAL ────────────────────────────────────── */
+  #diferencial { background: var(--deep); }
+  .diff-table {
+    display: grid; grid-template-columns: 1fr auto 1fr; gap: 0;
+    margin-top: 3rem; border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  }
+  .diff-col { padding: 0; }
+  .diff-header {
+    padding: 1.25rem 1.75rem; font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700; font-size: 0.9rem;
+  }
+  .diff-col-trad .diff-header { background: var(--surface2); color: var(--muted); }
+  .diff-col-thelabs .diff-header { background: var(--teal-dim); color: var(--teal); }
+  .diff-vs { display: flex; align-items: center; justify-content: center; background: var(--surface); border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+  .diff-vs span { font-family: 'Space Grotesk', sans-serif; font-weight: 800; font-size: 0.8rem; color: var(--faint); writing-mode: vertical-rl; letter-spacing: 0.2em; }
+  .diff-row {
+    display: flex; align-items: center;
+    padding: 0.85rem 1.75rem; font-size: 0.85rem;
+    border-top: 1px solid var(--border);
+  }
+  .diff-col-trad .diff-row { color: var(--muted); }
+  .diff-col-trad .diff-row::before { content: '✗'; color: var(--faint); margin-right: 0.6rem; flex-shrink: 0; }
+  .diff-col-thelabs .diff-row { color: var(--text); }
+  .diff-col-thelabs .diff-row::before { content: '✓'; color: var(--teal); margin-right: 0.6rem; flex-shrink: 0; }
+  .diff-quote {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.75rem 2rem;
+    margin-top: 2rem; text-align: center;
+    font-style: italic; color: var(--text); font-size: 1rem; line-height: 1.6;
+  }
+  .diff-quote strong { color: var(--teal); font-style: normal; }
+
+  /* ── CONTACTO ───────────────────────────────────────── */
+  #contacto { background: var(--navy); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3rem; align-items: start; }
+  .contact-info { }
+  .contact-info p { color: var(--muted); line-height: 1.7; margin-bottom: 2rem; }
+  .contact-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+  .contact-form {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+  }
+  .form-group { margin-bottom: 1rem; }
+  .form-group label { display: block; font-size: 0.75rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%; background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.65rem 0.9rem; color: var(--text);
+    font-family: 'Inter', sans-serif; font-size: 0.88rem;
+    outline: none; transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--teal); }
+  .form-group textarea { min-height: 80px; resize: vertical; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-submit {
+    width: 100%; background: var(--teal); color: var(--deep);
+    border: none; padding: 0.9rem; border-radius: 8px;
+    font-weight: 700; font-size: 0.9rem; cursor: pointer;
+    transition: opacity 0.2s; font-family: 'Inter', sans-serif;
+    margin-top: 0.5rem;
+  }
+  .form-submit:hover { opacity: 0.88; }
+  .form-success {
+    display: none; text-align: center; padding: 2rem;
+    color: var(--teal); font-weight: 600;
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footer {
+    background: var(--deep); border-top: 1px solid var(--border);
+    padding: 2rem 6vw; display: flex;
+    align-items: center; justify-content: space-between;
+  }
+  .footer-logo { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--muted); font-size: 0.9rem; }
+  .footer-logo span { color: var(--teal); }
+  .footer-copy { font-size: 0.75rem; color: var(--faint); }
+
+  /* ── ACCORDION MOBILE ───────────────────────────────── */
+  .accordion { display: none; flex-direction: column; gap: 0.75rem; margin-top: 2rem; }
+  .acc-item { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .acc-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 1.25rem; cursor: pointer;
+  }
+  .acc-header-left { display: flex; align-items: center; gap: 0.75rem; }
+  .acc-icon { font-size: 1.4rem; }
+  .acc-name { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--white); }
+  .acc-arrow { color: var(--muted); transition: transform 0.3s; font-size: 0.75rem; }
+  .acc-item.open .acc-arrow { transform: rotate(180deg); }
+  .acc-body { display: none; padding: 0 1.25rem 1.25rem; }
+  .acc-item.open .acc-body { display: block; }
+
+
+
+  /* ── SELECTOR DE NECESIDAD ───────────────────────────── */
+  .need-selector {
+    margin-top: 2.5rem;
+    background: linear-gradient(135deg, rgba(0,212,180,0.07), rgba(59,130,246,0.04));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem;
+  }
+  .need-selector h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    color: var(--white);
+    margin-bottom: .8rem;
+  }
+  .need-chips { display: flex; flex-wrap: wrap; gap: .65rem; }
+  .need-chip {
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    padding: .55rem .8rem;
+    border-radius: 999px;
+    font-size: .78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .need-chip:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+
+  .detail-hero-line {
+    color: var(--text);
+    font-size: .92rem;
+    line-height: 1.65;
+    padding: .9rem 1rem;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.035);
+    border: 1px solid var(--border);
+    margin-bottom: 1.2rem;
+  }
+  .detail-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; }
+  .detail-box { background: rgba(255,255,255,0.035); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; }
+  .detail-box-title { font-size:.68rem; text-transform:uppercase; letter-spacing:.08em; font-weight:800; margin-bottom:.6rem; }
+  .detail-impact {
+    margin-top: 1.25rem;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    padding: 1rem;
+  }
+  .detail-impact strong { color: var(--white); }
+  .detail-cta { margin-top: 1.3rem; display: flex; gap: .75rem; flex-wrap: wrap; }
+
+  .data-board {
+    display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2.5rem;
+  }
+  .data-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.1rem;
+  }
+  .data-value { font-family:'Space Grotesk',sans-serif; font-size:1.45rem; font-weight:800; color:var(--teal); }
+  .data-label { font-size:.75rem; color:var(--muted); line-height:1.45; margin-top:.25rem; }
+
+  .sticky-cta {
+    position: fixed;
+    right: 1.2rem;
+    bottom: 1.2rem;
+    z-index: 80;
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: var(--teal);
+    color: var(--deep);
+    text-decoration: none;
+    padding: .75rem 1rem;
+    border-radius: 999px;
+    font-size: .82rem;
+    font-weight: 800;
+    box-shadow: 0 18px 45px rgba(0,212,180,.22);
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .sticky-cta:hover { transform: translateY(-2px); opacity: .92; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 1024px) {
+    #inicio { grid-template-columns: 1fr; padding: 8rem 6vw 4rem; }
+    .hero-visual { height: 380px; }
+    .eco-layout { grid-template-columns: 1fr; }
+    .leader-grid { grid-template-columns: repeat(3, 1fr); }
+    .indicators-grid { grid-template-columns: repeat(2, 1fr); }
+    .data-board { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    section { padding: 4rem 5vw; }
+    .hero-visual { display: none; }
+    .hero-title { font-size: 2.4rem; }
+    .method-grid { grid-template-columns: 1fr; }
+    .solutions-grid { grid-template-columns: 1fr; }
+    .impact-levels { grid-template-columns: 1fr; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .diff-table { grid-template-columns: 1fr; }
+    .diff-vs { display: none; }
+    .diff-col-thelabs { border-top: 1px solid var(--border); }
+    .eco-grid { grid-template-columns: 1fr; }
+    .eco-map .eco-grid { display: none; }
+    .accordion { display: flex; }
+    .leader-grid { grid-template-columns: repeat(2, 1fr); }
+    .indicators-grid { grid-template-columns: repeat(2, 1fr); }
+    .data-board { grid-template-columns: repeat(2, 1fr); }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .process-flow { gap: 0; }
+    .flow-step { min-width: 100px; }
+    .detail-grid-2 { grid-template-columns: 1fr; }
+    .data-board { grid-template-columns: 1fr; }
+    .sticky-cta { left: 1rem; right: 1rem; justify-content:center; bottom:.8rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#inicio">Saltar al contenido</a>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">The<span>Labs</span></div>
+  <ul class="nav-links">
+    <li><a href="#inicio">Inicio</a></li>
+    <li><a href="#ecosistema">Ecosistema</a></li>
+    <li><a href="#metodo">Método</a></li>
+    <li><a href="#soluciones">Soluciones</a></li>
+    <li><a href="#impacto">Impacto</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="#contacto" class="nav-cta">Solicitar diagnóstico</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu" aria-label="Menú mobile">
+  <a href="#inicio" onclick="closeMobile()">Inicio</a>
+  <a href="#ecosistema" onclick="closeMobile()">Ecosistema</a>
+  <a href="#metodo" onclick="closeMobile()">Método</a>
+  <a href="#soluciones" onclick="closeMobile()">Soluciones</a>
+  <a href="#impacto" onclick="closeMobile()">Impacto</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-text">
+    <div class="hero-eyebrow">Ecosistema de transformación</div>
+    <h1 class="hero-title">The<span class="accent">Labs</span><br>Donde el autoconocimiento<br>se convierte en cultura</h1>
+    <p class="hero-sub">Un ecosistema de laboratorios experienciales para desarrollar personas, líderes y organizaciones capaces de operar con mayor conciencia, adaptación y efectividad.</p>
+    <p class="hero-desc">Las organizaciones ya no necesitan solo más conocimiento. Necesitan personas capaces de sostener su desempeño, colaborar mejor, decidir con más conciencia y adaptarse en contextos de presión e incertidumbre permanente.</p>
+    <div class="hero-btns">
+      <a href="#ecosistema" class="btn-primary">Explorar ecosistema</a>
+      <a href="#metodo" class="btn-outline">Ver metodología</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="orbital-container">
+      <div class="orbit-ring orbit-ring-1"></div>
+      <div class="orbit-ring orbit-ring-2"></div>
+      <svg class="connections" viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg">
+        <line x1="220" y1="220" x2="220" y2="50" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="220" y1="220" x2="390" y2="220" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="220" y1="220" x2="220" y2="390" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+        <line x1="220" y1="220" x2="50" y2="220" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
+      </svg>
+      <div class="core-node"><span>The</span><span>Labs</span></div>
+      <div class="satellite satellite-inner" onclick="scrollToEco('inner')"><div class="sat-icon">🧠</div>Inner<br>Labs</div>
+      <div class="satellite satellite-lider" onclick="scrollToEco('lider')"><div class="sat-icon">⚡</div>Lider<br>Labs</div>
+      <div class="satellite satellite-human" onclick="scrollToEco('human')"><div class="sat-icon">🌐</div>Human<br>Labs</div>
+      <div class="satellite satellite-health" onclick="scrollToEco('health')"><div class="sat-icon">💚</div>Health<br>Pulse</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ECOSISTEMA -->
+<section id="ecosistema">
+  <div class="section-label">Ecosistema integrado</div>
+  <h2 class="section-title">Cuatro laboratorios.<br>Un sistema de transformación.</h2>
+  <p class="section-desc">Cada laboratorio aborda un nivel distinto del desarrollo humano y organizacional. Juntos, forman un ecosistema que convierte autoconocimiento individual en capacidad colectiva.</p>
+
+  <div class="eco-layout">
+    <div class="eco-map">
+      <div class="eco-center">
+        <div class="eco-center-name">TheLabs</div>
+        <div class="eco-center-desc">Un sistema integrado de aprendizaje, autoconocimiento y transformación cultural</div>
+      </div>
+      <div class="eco-grid" id="ecoGrid">
+        <div class="eco-card inner" data-lab="inner" onclick="selectLab('inner')">
+          <div class="eco-card-icon">🧠</div>
+          <div class="eco-card-name">InnerLabs</div>
+          <div class="eco-card-cat">Autoconocimiento y gestión emocional</div>
+        </div>
+        <div class="eco-card lider" data-lab="lider" onclick="selectLab('lider')">
+          <div class="eco-card-icon">⚡</div>
+          <div class="eco-card-name">LiderLabs</div>
+          <div class="eco-card-cat">Liderazgo en complejidad</div>
+        </div>
+        <div class="eco-card human" data-lab="human" onclick="selectLab('human')">
+          <div class="eco-card-icon">🌐</div>
+          <div class="eco-card-name">HumanLabs</div>
+          <div class="eco-card-cat">Cultura, colaboración y aprendizaje colectivo</div>
+        </div>
+        <div class="eco-card health" data-lab="health" onclick="selectLab('health')">
+          <div class="eco-card-icon">💚</div>
+          <div class="eco-card-name">HealthPulse</div>
+          <div class="eco-card-cat">Bienestar, energía y sostenibilidad humana</div>
+        </div>
+      </div>
+      <!-- Mobile accordion -->
+      <div class="accordion" id="accordion"></div>
+    </div>
+
+    <div class="eco-detail" id="ecoDetail">
+      <div class="detail-empty" id="detailEmpty">
+        <div class="big">◎</div>
+        <p style="font-size:0.9rem;">Seleccioná un laboratorio<br>para explorar su contenido</p>
+      </div>
+      <div class="detail-content" id="detailContent" style="display:none;"></div>
+    </div>
+
+    <div class="need-selector">
+      <h3>¿Qué necesidad querés abordar primero?</h3>
+      <div class="need-chips">
+        <button class="need-chip" onclick="scrollToEco('inner')">Reducir reactividad individual</button>
+        <button class="need-chip" onclick="scrollToEco('lider')">Fortalecer líderes en cambio</button>
+        <button class="need-chip" onclick="scrollToEco('human')">Activar colaboración transversal</button>
+        <button class="need-chip" onclick="scrollToEco('health')">Medir energía y desgaste</button>
+        <button class="need-chip" onclick="document.getElementById('proceso').scrollIntoView({behavior:'smooth'})">Ver proceso completo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MÉTODO -->
+<section id="metodo">
+  <div class="section-label">Arquitectura metodológica</div>
+  <h2 class="section-title">Una metodología diseñada para<br>transformar comportamiento,<br>no solo transmitir contenido.</h2>
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-num">Capa 01</div>
+      <div class="method-title">Activación</div>
+      <div class="method-desc">Podcast, microcontenidos o disparadores previos que preparan emocional y cognitivamente al participante antes del encuentro. Genera reflexión inicial, preguntas personales e identificación de situaciones reales.</div>
+    </div>
+    <div class="method-card" style="border-color: var(--teal-mid);">
+      <div class="method-num" style="color: var(--teal);">Capa 02</div>
+      <div class="method-title">Método LEADER</div>
+      <div class="method-desc">La columna vertebral de autogestión. Un proceso de seis pasos que permite pasar de la reacción automática a la acción consciente, trabajando emociones, patrones y respuestas en tiempo real.</div>
+    </div>
+    <div class="method-card">
+      <div class="method-num">Capa 03</div>
+      <div class="method-title">Laboratorios</div>
+      <div class="method-desc">Espacios experienciales de entrenamiento real, donde las personas trabajan sobre situaciones concretas de su contexto laboral. No son clases. No son simulaciones. Son espacios protegidos de práctica y transformación.</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 4rem;">
+    <div class="section-label">El núcleo del método</div>
+    <h3 style="font-family:'Space Grotesk',sans-serif; font-size:1.4rem; font-weight:700; color:var(--white); margin-bottom:0.5rem; letter-spacing:-0.01em;">LEADER: de la reacción automática a la acción consciente</h3>
+    <div class="leader-grid">
+      <div class="leader-card">
+        <div class="leader-letter">L</div>
+        <div class="leader-word">Leer(se)</div>
+        <div class="leader-desc">Reconocer emociones, estado interno y señales personales</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-letter">E</div>
+        <div class="leader-word">Entender</div>
+        <div class="leader-desc">Comprender el origen de la emoción y sus disparadores</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-letter">A</div>
+        <div class="leader-word">Aceptar</div>
+        <div class="leader-desc">Validar lo que ocurre sin negarlo ni evitarlo</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-letter">D</div>
+        <div class="leader-word">Desarmar</div>
+        <div class="leader-desc">Cuestionar creencias, patrones reactivos y respuestas automáticas</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-letter">E</div>
+        <div class="leader-word">Elegir</div>
+        <div class="leader-desc">Definir una respuesta consciente y alineada al contexto</div>
+      </div>
+      <div class="leader-card">
+        <div class="leader-letter">R</div>
+        <div class="leader-word">Reconfigurar</div>
+        <div class="leader-desc">Consolidar nuevos comportamientos y aprendizajes sostenibles</div>
+      </div>
+    </div>
+    <div class="leader-quote">LEADER permite pasar de la reacción automática a la acción consciente.</div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROCESO -->
+<section id="proceso">
+  <div class="section-label">Cómo trabajamos</div>
+  <h2 class="section-title">El proceso TheLabs</h2>
+  <p class="section-desc">Cada intervención sigue una arquitectura de siete fases que garantiza diagnóstico, diseño, experiencia e impacto medible.</p>
+  <div class="process-flow">
+    <div class="flow-step">
+      <div class="flow-circle">🔍</div>
+      <div class="flow-name">Diagnosticar</div>
+      <div class="flow-desc">Comprender el desafío humano, cultural o de liderazgo</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">⚙️</div>
+      <div class="flow-name">Diseñar</div>
+      <div class="flow-desc">Configurar el laboratorio según audiencia y objetivo</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">🔋</div>
+      <div class="flow-name">Activar</div>
+      <div class="flow-desc">Instalar narrativa y predisposición al aprendizaje</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">🧪</div>
+      <div class="flow-name">Experimentar</div>
+      <div class="flow-desc">Desarrollar laboratorios vivenciales con situaciones reales</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">🔗</div>
+      <div class="flow-name">Integrar</div>
+      <div class="flow-desc">Traducir aprendizajes en hábitos y acciones observables</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">📊</div>
+      <div class="flow-name">Medir</div>
+      <div class="flow-desc">Evaluar impacto en percepción, comportamiento y resultados</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">🚀</div>
+      <div class="flow-name">Escalar</div>
+      <div class="flow-desc">Convertir aprendizajes individuales en capacidad colectiva</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SOLUCIONES -->
+<section id="soluciones">
+  <div class="section-label">Las cuatro soluciones</div>
+  <h2 class="section-title">Cada laboratorio,<br>un nivel de transformación.</h2>
+  <div class="solutions-grid" id="solutionsGrid"></div>
+</section>
+
+<div class="divider"></div>
+
+<!-- IMPACTO -->
+<section id="impacto">
+  <div class="section-label">Del aprendizaje individual a la capacidad organizacional</div>
+  <h2 class="section-title">Tres niveles de impacto</h2>
+  <div class="impact-levels">
+    <div class="impact-card">
+      <div class="impact-level" style="color:var(--inner);">Nivel 1 — Persona</div>
+      <div class="impact-title">Capacidades individuales</div>
+      <div class="impact-items">
+        <div class="impact-item"><div class="impact-dot" style="background:var(--inner)"></div>Mayor conciencia emocional</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--inner)"></div>Mejor regulación bajo presión</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--inner)"></div>Menor reactividad</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--inner)"></div>Mayor autoliderazgo</div>
+      </div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-level" style="color:var(--lider);">Nivel 2 — Equipo</div>
+      <div class="impact-title">Dinámica colectiva</div>
+      <div class="impact-items">
+        <div class="impact-item"><div class="impact-dot" style="background:var(--lider)"></div>Mejores conversaciones</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--lider)"></div>Mayor confianza interpersonal</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--lider)"></div>Colaboración más efectiva</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--lider)"></div>Menos conflictos improductivos</div>
+      </div>
+    </div>
+    <div class="impact-card">
+      <div class="impact-level" style="color:var(--human);">Nivel 3 — Organización</div>
+      <div class="impact-title">Capacidad sistémica</div>
+      <div class="impact-items">
+        <div class="impact-item"><div class="impact-dot" style="background:var(--human)"></div>Mayor adaptabilidad</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--human)"></div>Cultura más consciente</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--human)"></div>Mejor toma de decisiones</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--human)"></div>Resiliencia frente al cambio</div>
+        <div class="impact-item"><div class="impact-dot" style="background:var(--human)"></div>Desempeño sostenible</div>
+      </div>
+    </div>
+  </div>
+  <div style="margin-top:2.5rem;">
+    <div class="section-label">Indicadores que medimos</div>
+    <div class="indicators-grid">
+      <div class="indicator"><div class="indicator-icon">📈</div><div class="indicator-label">NPS de experiencia</div></div>
+      <div class="indicator"><div class="indicator-icon">🧭</div><div class="indicator-label">Nivel de autoconciencia percibida</div></div>
+      <div class="indicator"><div class="indicator-icon">⬇️</div><div class="indicator-label">Reducción de reactividad declarada</div></div>
+      <div class="indicator"><div class="indicator-icon">💬</div><div class="indicator-label">Calidad de conversaciones</div></div>
+      <div class="indicator"><div class="indicator-icon">🤝</div><div class="indicator-label">Nivel de confianza del equipo</div></div>
+      <div class="indicator"><div class="indicator-icon">🔄</div><div class="indicator-label">Adopción de hábitos</div></div>
+      <div class="indicator"><div class="indicator-icon">💚</div><div class="indicator-label">Pulso de bienestar</div></div>
+      <div class="indicator"><div class="indicator-icon">🌐</div><div class="indicator-label">Indicadores de colaboración</div></div>
+    </div>
+    <div class="data-board" aria-label="Sistema de medición TheLabs">
+      <div class="data-card"><div class="data-value">01</div><div class="data-label">Pulso previo: percepción, energía, foco y tensión dominante.</div></div>
+      <div class="data-card"><div class="data-value">02</div><div class="data-label">Evidencia conductual: compromisos, prácticas y cambios observables.</div></div>
+      <div class="data-card"><div class="data-value">03</div><div class="data-label">Seguimiento: adopción de hábitos, calidad conversacional y aprendizaje aplicado.</div></div>
+      <div class="data-card"><div class="data-value">04</div><div class="data-label">Escalabilidad: aprendizajes convertidos en lenguaje común y rituales culturales.</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIFERENCIAL -->
+<section id="diferencial">
+  <div class="section-label">Por qué TheLabs</div>
+  <h2 class="section-title">No es capacitación tradicional.<br>Es transformación experiencial.</h2>
+  <div class="diff-table">
+    <div class="diff-col diff-col-trad">
+      <div class="diff-header">Capacitación tradicional</div>
+      <div class="diff-row">Transmite contenido</div>
+      <div class="diff-row">Se enfoca en teoría</div>
+      <div class="diff-row">Termina en el aula</div>
+      <div class="diff-row">Mide asistencia</div>
+      <div class="diff-row">Es genérica</div>
+      <div class="diff-row">Forma individuos aislados</div>
+    </div>
+    <div class="diff-vs"><span>VS</span></div>
+    <div class="diff-col diff-col-thelabs">
+      <div class="diff-header">TheLabs</div>
+      <div class="diff-row">Transforma comportamiento</div>
+      <div class="diff-row">Trabaja sobre casos reales</div>
+      <div class="diff-row">Continúa en hábitos</div>
+      <div class="diff-row">Mide impacto y adopción</div>
+      <div class="diff-row">Se adapta al contexto</div>
+      <div class="diff-row">Desarrolla capacidad colectiva</div>
+    </div>
+  </div>
+  <div class="diff-quote">
+    El valor de TheLabs no está en lo que las personas escuchan,<br>
+    sino en lo que <strong>empiezan a hacer distinto</strong>.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-label">Empecemos</div>
+  <h2 class="section-title">Diseñemos el laboratorio<br>que tu organización necesita</h2>
+  <div class="contact-grid">
+    <div class="contact-info">
+      <p>Cada organización tiene un desafío humano distinto. TheLabs permite diseñar experiencias específicas para activar conciencia, fortalecer liderazgo, cuidar la energía y acelerar cambios culturales.</p>
+      <p style="font-size:0.85rem; color: var(--faint);">La cultura no cambia por discurso; cambia por experiencias repetidas. No desarrollamos habilidades blandas. Entrenamos capacidades humanas críticas.</p>
+      <div class="contact-btns">
+        <a href="#contacto" class="btn-primary">Quiero conocer más</a>
+        <a href="#contacto" class="btn-outline">Solicitar diagnóstico</a>
+      </div>
+    </div>
+    <div class="contact-form">
+      <form id="contactForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" required>
+          </div>
+          <div class="form-group">
+            <label>Empresa</label>
+            <input type="text" placeholder="Nombre de la empresa" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Cargo</label>
+            <input type="text" placeholder="Tu cargo actual">
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="tu@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Desafío principal</label>
+          <textarea placeholder="¿Cuál es el desafío humano o cultural que estás enfrentando?"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Solución de interés</label>
+          <select>
+            <option value="">Seleccionar...</option>
+            <option>InnerLabs — Autoconocimiento</option>
+            <option>LiderLabs — Liderazgo</option>
+            <option>HumanLabs — Cultura</option>
+            <option>HealthPulse — Bienestar</option>
+            <option>No sé aún / quiero diagnóstico</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Diseñar una experiencia →</button>
+      </form>
+      <div class="form-success" id="formSuccess">
+        <div style="font-size:2rem; margin-bottom:0.75rem;">✓</div>
+        <div>¡Gracias! Nos pondremos en contacto pronto.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a href="#contacto" class="sticky-cta">Diseñar experiencia →</a>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">The<span>Labs</span></div>
+  <div class="footer-copy">© 2026 TheLabs. Ecosistema de transformación humana.</div>
+</footer>
+
+<script>
+// ── DATA ─────────────────────────────────────────────────
+const labs = {
+  inner: {
+    name: "InnerLabs",
+    icon: "🧠",
+    category: "Autoconocimiento y gestión emocional",
+    color: "var(--inner)",
+    colorDim: "var(--inner-dim)",
+    tagline: "El laboratorio donde la transformación empieza por dentro.",
+    purpose: "Desarrollar en las personas la capacidad de observarse, comprender sus patrones internos y actuar con mayor conciencia en contextos laborales exigentes.",
+    problem: ["Reactividad bajo presión", "Falta de autoconciencia", "Dificultad para gestionar emociones", "Patrones automáticos de conducta", "Desgaste individual"],
+    process: ["Activación previa", "Autodiagnóstico personal", "Método LEADER", "Laboratorio experiencial", "Plan de acción individual", "Seguimiento de hábitos"],
+    deliverables: ["Personas con mayor conciencia emocional", "Menor reactividad bajo presión", "Mayor capacidad de sostener desempeño", "Plan de acción personal activado"],
+    audience: "Colaboradores, profesionales técnicos, jóvenes talentos, equipos en proceso de cambio",
+    formats: "Workshop · Programa de 4 a 6 encuentros · Experiencia híbrida · Microlearning + laboratorio",
+    results: ["Autoconciencia", "Gestión emocional", "Autoliderazgo", "Reducción de reactividad", "Plan de acción personal"],
+    metrics: ["Autoconciencia percibida", "Reducción de reactividad", "Calidad de decisiones", "Cumplimiento de plan personal"],
+    useCases: ["Equipos bajo presión operativa", "Jóvenes talentos", "Procesos de cambio", "Profesionales técnicos con alta exigencia"],
+    experience: "Activación asincrónica, laboratorio vivencial y plan de hábitos individuales con seguimiento."
+  },
+  lider: {
+    name: "LiderLabs",
+    icon: "⚡",
+    category: "Liderazgo en complejidad",
+    color: "var(--lider)",
+    colorDim: "var(--lider-dim)",
+    tagline: "Liderar no es tener todas las respuestas, es crear condiciones para que otros puedan actuar mejor.",
+    purpose: "Desarrollar líderes capaces de conducir equipos en contextos de incertidumbre, cambio, presión operativa y transformación cultural.",
+    problem: ["Liderazgo reactivo", "Decisiones poco conscientes", "Falta de conversaciones difíciles", "Baja capacidad de contención", "Equipos desalineados", "Dificultad para liderar cambios"],
+    process: ["Diagnóstico de madurez de liderazgo", "Activación conceptual", "Laboratorio de conversaciones críticas", "Entrenamiento en toma de decisiones bajo presión", "Prácticas de liderazgo habilitador", "Plan de evolución individual y de equipo"],
+    deliverables: ["Líderes capaces de habilitar conversaciones", "Mayor capacidad de sostener foco", "Mejores decisiones bajo presión", "Acompañamiento efectivo de procesos de cambio"],
+    audience: "Mandos medios, altos mandos, sponsors, gerentes, líderes de transformación",
+    formats: "Bootcamp de liderazgo · Laboratorio ejecutivo · Programa modular · Coaching grupal",
+    results: ["Mejores conversaciones", "Decisiones más conscientes", "Liderazgo habilitador", "Gestión de cambio", "Mayor madurez de equipo"],
+    metrics: ["Calidad conversacional", "Velocidad de decisión", "Confianza del equipo", "Madurez de liderazgo"],
+    useCases: ["Mandos medios en transición", "Sponsors de cambio", "Comités ejecutivos", "Líderes con equipos críticos"],
+    experience: "Laboratorios ejecutivos con casos reales, conversaciones críticas y prácticas de liderazgo habilitador."
+  },
+  human: {
+    name: "HumanLabs",
+    icon: "🌐",
+    category: "Cultura, colaboración y aprendizaje colectivo",
+    color: "var(--human)",
+    colorDim: "var(--human-dim)",
+    tagline: "La cultura no cambia por discurso; cambia por experiencias compartidas.",
+    purpose: "Activar experiencias masivas que permitan instalar lenguaje común, hábitos culturales y capacidades transversales en toda la organización.",
+    problem: ["Cultura fragmentada", "Falta de colaboración transversal", "Silos organizacionales", "Baja apropiación del cambio", "Desconexión entre estrategia y comportamiento cotidiano"],
+    process: ["Identificación del desafío cultural", "Diseño de experiencia colectiva", "Activación narrativa", "Laboratorios grupales", "Ritualización de aprendizajes", "Medición de adopción cultural"],
+    deliverables: ["Equipos con lenguaje común", "Mayor colaboración transversal", "Hábitos compartidos instalados", "Mayor capacidad de adaptación organizacional"],
+    audience: "Toda la organización, equipos transversales, comunidades internas, áreas en transformación",
+    formats: "Experiencia masiva · Cultura day · Ciclos de aprendizaje · Laboratorios por comunidad",
+    results: ["Lenguaje común", "Colaboración transversal", "Hábitos culturales", "Mayor apropiación del cambio", "Identidad compartida"],
+    metrics: ["Adopción de lenguaje común", "Colaboración transversal", "Participación activa", "Rituales culturales instalados"],
+    useCases: ["Transformación cultural", "Lanzamiento de valores", "Comunidades internas", "Integración post-cambio"],
+    experience: "Experiencias colectivas, rituales de aprendizaje y laboratorios grupales para instalar hábitos culturales."
+  },
+  health: {
+    name: "HealthPulse",
+    icon: "💚",
+    category: "Bienestar, energía y sostenibilidad humana",
+    color: "var(--health)",
+    colorDim: "var(--health-dim)",
+    tagline: "Lo que no se mide en energía, se termina pagando en desgaste.",
+    purpose: "Medir, comprender y fortalecer la energía organizacional, reduciendo desgaste y promoviendo condiciones de bienestar sostenible.",
+    problem: ["Fatiga emocional", "Estrés crónico", "Burnout", "Baja energía organizacional", "Pérdida de foco", "Desgaste en contextos de cambio"],
+    process: ["Pulso inicial de bienestar", "Mapa de energía organizacional", "Identificación de factores de desgaste", "Laboratorios de recuperación y regulación", "Intervenciones focalizadas", "Seguimiento de indicadores"],
+    deliverables: ["Mayor conciencia de energía colectiva", "Mejores prácticas de cuidado", "Mayor sostenibilidad del desempeño", "Dashboard de bienestar organizacional"],
+    audience: "Organizaciones en alta exigencia, equipos críticos, líderes con presión operativa, comités de bienestar",
+    formats: "Diagnóstico de pulso · Intervenciones focalizadas · Laboratorios de bienestar · Seguimiento periódico",
+    results: ["Mapa de bienestar", "Reducción de desgaste", "Mayor conciencia colectiva", "Prácticas de regulación", "Sostenibilidad del desempeño"],
+    metrics: ["Pulso de bienestar", "Nivel de energía", "Factores de desgaste", "Prácticas de recuperación"],
+    useCases: ["Equipos con fatiga", "Áreas críticas", "Transformaciones intensas", "Prevención de burnout"],
+    experience: "Diagnóstico de energía, laboratorios de regulación y tablero de seguimiento para sostener desempeño."
+  }
+};
+
+// ── ECOSISTEMA DETAIL ─────────────────────────────────────
+let activeLab = null;
+
+function selectLab(key) {
+  activeLab = key;
+  const lab = labs[key];
+
+  // Update card active states
+  document.querySelectorAll('.eco-card').forEach(c => {
+    c.classList.toggle('active', c.dataset.lab === key);
+  });
+
+  const empty = document.getElementById('detailEmpty');
+  const content = document.getElementById('detailContent');
+  empty.style.display = 'none';
+  content.style.display = 'block';
+
+  const stepsHTML = lab.process.map((s,i) => `
+    <div class="process-step">
+      <div class="step-num" style="background:${lab.colorDim}; color:${lab.color}">${i+1}</div>
+      <span>${s}</span>
+    </div>`).join('');
+
+  const problemsHTML = lab.problem.map(p => `<span class="detail-pill">${p}</span>`).join('');
+
+  const deliverablesHTML = lab.deliverables.map(d => `<li>${d}</li>`).join('');
+
+  const metricsHTML = (lab.metrics || []).map(m => `<span class="detail-pill">${m}</span>`).join('');
+  const useCasesHTML = (lab.useCases || []).map(u => `<span class="detail-pill">${u}</span>`).join('');
+
+  content.innerHTML = `
+    <span class="detail-badge" style="background:${lab.colorDim}; color:${lab.color}">${lab.category}</span>
+    <div class="detail-name">${lab.icon} ${lab.name}</div>
+    <div class="detail-purpose">${lab.purpose}</div>
+    <div class="detail-hero-line"><strong style="color:${lab.color}">Experiencia:</strong> ${lab.experience || lab.tagline}</div>
+
+    <div class="detail-section-title" style="color:${lab.color}">Problemas que aborda</div>
+    <div class="detail-pills">${problemsHTML}</div>
+
+    <div class="detail-section-title" style="color:${lab.color}">Proceso desplegado</div>
+    <div class="process-steps">${stepsHTML}</div>
+
+    <div class="detail-grid-2">
+      <div class="detail-box">
+        <div class="detail-box-title" style="color:${lab.color}">Entregables</div>
+        <ul class="deliverable-list">${deliverablesHTML}</ul>
+      </div>
+      <div class="detail-box">
+        <div class="detail-box-title" style="color:${lab.color}">Casos de uso</div>
+        <div class="detail-pills">${useCasesHTML}</div>
+      </div>
+    </div>
+
+    <div class="detail-impact">
+      <strong>Indicadores sugeridos:</strong>
+      <div class="detail-pills" style="margin-top:.7rem">${metricsHTML}</div>
+    </div>
+
+    <div class="detail-cta">
+      <button class="sol-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})">Diseñar este laboratorio →</button>
+      <button class="sol-btn" onclick="document.getElementById('metodo').scrollIntoView({behavior:'smooth'})">Ver método</button>
+    </div>
+  `;
+
+  // Scroll to detail on mobile
+  if (window.innerWidth <= 768) {
+    document.getElementById('ecoDetail').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+
+// ── SOLUTIONS GRID ────────────────────────────────────────
+function buildSolutions() {
+  const grid = document.getElementById('solutionsGrid');
+  Object.entries(labs).forEach(([key, lab]) => {
+    const resultsHTML = lab.results.map(r => `<span class="sol-result-tag">${r}</span>`).join('');
+    grid.innerHTML += `
+      <div class="sol-card ${key}">
+        <div class="sol-stripe"></div>
+        <div class="sol-icon">${lab.icon}</div>
+        <div class="sol-name">${lab.name}</div>
+        <div class="sol-tagline">${lab.tagline}</div>
+        <div class="sol-meta">
+          <div class="sol-meta-item"><label>Para quién</label><p>${lab.audience}</p></div>
+          <div class="sol-meta-item"><label>Formatos</label><p>${lab.formats}</p></div>
+        </div>
+        <div class="sol-results">${resultsHTML}</div>
+        <button class="sol-btn" onclick="scrollToEco('${key}')">Explorar proceso →</button>
+      </div>
+    `;
+  });
+}
+
+// ── ACCORDION MOBILE ──────────────────────────────────────
+function buildAccordion() {
+  const acc = document.getElementById('accordion');
+  Object.entries(labs).forEach(([key, lab]) => {
+    const stepsHTML = lab.process.map((s,i) => `
+      <div class="process-step" style="margin-bottom:0.4rem">
+        <div class="step-num" style="background:${lab.colorDim}; color:${lab.color}; min-width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:700; flex-shrink:0;">${i+1}</div>
+        <span style="font-size:0.85rem; color:var(--text)">${s}</span>
+      </div>`).join('');
+
+    const el = document.createElement('div');
+    el.className = key === 'inner' ? 'acc-item open' : 'acc-item';
+    el.innerHTML = `
+      <div class="acc-header" onclick="toggleAcc(this)">
+        <div class="acc-header-left">
+          <div class="acc-icon">${lab.icon}</div>
+          <div>
+            <div class="acc-name">${lab.name}</div>
+            <div style="font-size:0.7rem; color:var(--muted)">${lab.category}</div>
+          </div>
+        </div>
+        <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-body">
+        <p style="font-size:0.85rem; color:var(--muted); margin-bottom:.65rem; line-height:1.6">${lab.purpose}</p>
+        <p style="font-size:0.82rem; color:${lab.color}; margin-bottom:1rem; line-height:1.55; font-style:italic">${lab.tagline}</p>
+        <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:${lab.color}; margin-bottom:0.5rem">Proceso</div>
+        ${stepsHTML}
+        <div style="font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:${lab.color}; margin:0.75rem 0 0.5rem">Entregables</div>
+        ${lab.deliverables.map(d => `<div style="font-size:0.8rem; color:var(--text); margin-bottom:0.3rem; padding-left:0.5rem">→ ${d}</div>`).join('')}
+      </div>
+    `;
+    acc.appendChild(el);
+  });
+}
+
+function toggleAcc(header) {
+  const item = header.parentElement;
+  item.classList.toggle('open');
+}
+
+// ── NAV MOBILE ────────────────────────────────────────────
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.toggle('open');
+});
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// ── SCROLL TO HERO NODES ──────────────────────────────────
+function scrollToEco(key) {
+  document.getElementById('ecosistema').scrollIntoView({ behavior: 'smooth' });
+  setTimeout(() => selectLab(key), 600);
+}
+
+// ── FORM ──────────────────────────────────────────────────
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').style.display = 'block';
+}
+
+// ── SCROLL PROGRESS ───────────────────────────────────────
+window.addEventListener('scroll', () => {
+  const max = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+  const bar = document.getElementById('scrollProgress');
+  if (bar) bar.style.width = pct + '%';
+});
+
+// ── INIT ──────────────────────────────────────────────────
+buildSolutions();
+buildAccordion();
+selectLab('inner');
+</script>
+</body>
+</html>
