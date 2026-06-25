@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TheLabs — Ecosistema de Transformación Humana</title>
-<meta name="description" content="TheLabs: ecosistema de laboratorios experienciales para convertir autoconocimiento, liderazgo, cultura y bienestar en capacidades organizacionales medibles.">
+<title>TheLabs + WellScore — Sistema de Transformación Cultural Medible</title>
+<meta name="description" content="TheLabs + WellScore: sistema integral para diagnosticar cultura, liderazgo y bienestar, intervenir con laboratorios experienciales y medir impacto organizacional.">
 <meta name="theme-color" content="#080c18">
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap');
@@ -35,6 +35,12 @@
     --human-dim: rgba(16,185,129,0.15);
     --health: #f59e0b;
     --health-dim: rgba(245,158,11,0.15);
+
+    --well: #00d4b4;
+    --well-dim: rgba(0,212,180,0.14);
+    --well-mid: rgba(0,212,180,0.34);
+    --risk: #ef4444;
+    --risk-dim: rgba(239,68,68,0.12);
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -87,7 +93,7 @@
     letter-spacing: -0.02em;
   }
   .nav-logo span { color: var(--teal); }
-  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links { display: flex; gap: 1.35rem; list-style: none; }
   .nav-links a {
     color: var(--muted); text-decoration: none;
     font-size: 0.85rem; font-weight: 500; letter-spacing: 0.02em;
@@ -681,6 +687,309 @@
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
   }
 
+
+  /* ── WELLSCORE + SISTEMA INTEGRADO ───────────────────── */
+  .wellscore-node {
+    position: absolute;
+    top: 54px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: .45rem;
+    background: rgba(8,12,24,.78);
+    border: 1px solid var(--well-mid);
+    color: var(--well);
+    padding: .5rem .85rem;
+    border-radius: 999px;
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    box-shadow: 0 0 28px rgba(0,212,180,.16);
+  }
+
+  #wellscore { background: var(--deep); }
+
+  .well-hero {
+    display: grid;
+    grid-template-columns: .95fr 1.05fr;
+    gap: 2rem;
+    margin-top: 3rem;
+    align-items: stretch;
+  }
+
+  .well-panel {
+    background: linear-gradient(135deg, rgba(0,212,180,.08), rgba(59,130,246,.04));
+    border: 1px solid var(--well-mid);
+    border-radius: 18px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .well-panel::after {
+    content: '';
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,180,.16), transparent 70%);
+  }
+
+  .well-title {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--white);
+    font-size: 1.55rem;
+    line-height: 1.15;
+    letter-spacing: -.02em;
+    margin-bottom: .9rem;
+  }
+
+  .well-title span { color: var(--well); }
+
+  .well-copy {
+    color: var(--muted);
+    font-size: .92rem;
+    line-height: 1.75;
+    max-width: 620px;
+  }
+
+  .well-quote {
+    margin-top: 1.4rem;
+    padding: 1rem 1.1rem;
+    background: rgba(255,255,255,.035);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--well);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: .9rem;
+    line-height: 1.65;
+  }
+
+  .well-dimensions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: .9rem;
+  }
+
+  .dimension-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.25rem;
+    min-height: 176px;
+  }
+
+  .dimension-icon { font-size: 1.6rem; margin-bottom: .65rem; }
+  .dimension-title {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--white);
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: .45rem;
+  }
+  .dimension-desc {
+    color: var(--muted);
+    font-size: .78rem;
+    line-height: 1.55;
+  }
+
+  .measurement-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.3rem;
+  }
+
+  .measure-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.15rem;
+  }
+  .measure-num {
+    color: var(--well);
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 800;
+    font-size: .78rem;
+    margin-bottom: .55rem;
+  }
+  .measure-title {
+    color: var(--white);
+    font-weight: 800;
+    font-size: .88rem;
+    margin-bottom: .4rem;
+  }
+  .measure-desc { color: var(--muted); font-size: .75rem; line-height: 1.55; }
+
+  .system-map {
+    margin-top: 3rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 1.5rem;
+    overflow: hidden;
+  }
+
+  .system-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    align-items: flex-start;
+    margin-bottom: 1.4rem;
+  }
+
+  .system-title {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--white);
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+
+  .system-sub {
+    color: var(--muted);
+    font-size: .82rem;
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  .cycle-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: .75rem;
+    position: relative;
+  }
+
+  .cycle-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    position: relative;
+    min-height: 158px;
+  }
+
+  .cycle-card:not(:last-child)::after {
+    content: '→';
+    position: absolute;
+    right: -.62rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--faint);
+    z-index: 2;
+    font-weight: 900;
+  }
+
+  .cycle-step {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--well);
+    font-weight: 900;
+    font-size: .78rem;
+    margin-bottom: .45rem;
+  }
+
+  .cycle-name {
+    color: var(--white);
+    font-weight: 800;
+    font-size: .92rem;
+    margin-bottom: .4rem;
+  }
+
+  .cycle-desc {
+    color: var(--muted);
+    font-size: .74rem;
+    line-height: 1.5;
+  }
+
+  .timeline-integrated {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: .75rem;
+  }
+
+  .time-card {
+    background: rgba(255,255,255,.035);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+  }
+
+  .time-label {
+    color: var(--well);
+    font-size: .68rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    margin-bottom: .45rem;
+  }
+
+  .time-title {
+    color: var(--white);
+    font-weight: 800;
+    font-size: .86rem;
+    margin-bottom: .35rem;
+  }
+
+  .time-desc {
+    color: var(--muted);
+    font-size: .72rem;
+    line-height: 1.45;
+  }
+
+  .evidence-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .evidence-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.35rem;
+  }
+
+  .evidence-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: .6rem;
+  }
+
+  .evidence-card p {
+    color: var(--muted);
+    font-size: .78rem;
+    line-height: 1.55;
+  }
+
+  .sol-card.wellscore:hover { border-color: var(--well); }
+  .sol-card.wellscore .sol-stripe { background: var(--well); }
+  .sol-card.wellscore .sol-result-tag { background: var(--well-dim); color: var(--well); }
+  .sol-card.wellscore {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, rgba(0,212,180,.07), rgba(17,24,39,1));
+    border-color: var(--well-mid);
+  }
+
+  .well-trigger {
+    margin-top: .9rem;
+    padding: .85rem .95rem;
+    border-radius: 12px;
+    border: 1px solid var(--well-mid);
+    background: var(--well-dim);
+    color: var(--text);
+    font-size: .83rem;
+    line-height: 1.55;
+  }
+  .well-trigger strong { color: var(--well); }
+
+
   /* ── RESPONSIVE ─────────────────────────────────────── */
   @media (max-width: 1024px) {
     #inicio { grid-template-columns: 1fr; padding: 8rem 6vw 4rem; }
@@ -689,6 +998,11 @@
     .leader-grid { grid-template-columns: repeat(3, 1fr); }
     .indicators-grid { grid-template-columns: repeat(2, 1fr); }
     .data-board { grid-template-columns: repeat(2, 1fr); }
+    .well-hero { grid-template-columns: 1fr; }
+    .cycle-grid { grid-template-columns: 1fr; }
+    .cycle-card:not(:last-child)::after { content: '↓'; right: 50%; top: auto; bottom: -.85rem; transform: translateX(50%); }
+    .timeline-integrated { grid-template-columns: repeat(3, 1fr); }
+    .evidence-board { grid-template-columns: 1fr; }
   }
   @media (max-width: 768px) {
     nav { padding: 0 1.25rem; }
@@ -716,6 +1030,10 @@
     .flow-step { min-width: 100px; }
     .detail-grid-2 { grid-template-columns: 1fr; }
     .data-board { grid-template-columns: 1fr; }
+    .well-dimensions { grid-template-columns: 1fr; }
+    .measurement-grid { grid-template-columns: 1fr; }
+    .timeline-integrated { grid-template-columns: 1fr; }
+    .system-header { flex-direction: column; }
     .sticky-cta { left: 1rem; right: 1rem; justify-content:center; bottom:.8rem; }
   }
 </style>
@@ -730,12 +1048,13 @@
   <ul class="nav-links">
     <li><a href="#inicio">Inicio</a></li>
     <li><a href="#ecosistema">Ecosistema</a></li>
+    <li><a href="#wellscore">WellScore</a></li>
     <li><a href="#metodo">Método</a></li>
-    <li><a href="#soluciones">Soluciones</a></li>
+    <li><a href="#proceso">Proceso</a></li>
     <li><a href="#impacto">Impacto</a></li>
     <li><a href="#contacto">Contacto</a></li>
   </ul>
-  <a href="#contacto" class="nav-cta">Solicitar diagnóstico</a>
+  <a href="#wellscore" class="nav-cta">Ver sistema</a>
   <div class="hamburger" id="hamburger">
     <span></span><span></span><span></span>
   </div>
@@ -743,8 +1062,9 @@
 <div class="mobile-menu" id="mobileMenu" aria-label="Menú mobile">
   <a href="#inicio" onclick="closeMobile()">Inicio</a>
   <a href="#ecosistema" onclick="closeMobile()">Ecosistema</a>
+  <a href="#wellscore" onclick="closeMobile()">WellScore</a>
   <a href="#metodo" onclick="closeMobile()">Método</a>
-  <a href="#soluciones" onclick="closeMobile()">Soluciones</a>
+  <a href="#proceso" onclick="closeMobile()">Proceso</a>
   <a href="#impacto" onclick="closeMobile()">Impacto</a>
   <a href="#contacto" onclick="closeMobile()">Contacto</a>
 </div>
@@ -753,13 +1073,13 @@
 <section id="inicio">
   <div class="hero-bg"></div>
   <div class="hero-text">
-    <div class="hero-eyebrow">Ecosistema de transformación</div>
-    <h1 class="hero-title">The<span class="accent">Labs</span><br>Donde el autoconocimiento<br>se convierte en cultura</h1>
-    <p class="hero-sub">Un ecosistema de laboratorios experienciales para desarrollar personas, líderes y organizaciones capaces de operar con mayor conciencia, adaptación y efectividad.</p>
-    <p class="hero-desc">Las organizaciones ya no necesitan solo más conocimiento. Necesitan personas capaces de sostener su desempeño, colaborar mejor, decidir con más conciencia y adaptarse en contextos de presión e incertidumbre permanente.</p>
+    <div class="hero-eyebrow">Sistema de transformación cultural medible</div>
+    <h1 class="hero-title">The<span class="accent">Labs</span><br>Diagnosticar, transformar<br>y demostrar impacto</h1>
+    <p class="hero-sub">Un sistema que integra WellScore como diagnóstico de cultura, liderazgo y bienestar, y TheLabs como ecosistema de laboratorios para convertir evidencia en capacidades organizacionales.</p>
+    <p class="hero-desc">La transformación cultural no empieza con un taller: empieza entendiendo qué vive realmente la organización. WellScore mide el pulso real; TheLabs interviene con experiencias diseñadas a medida; la medición posterior demuestra si el cambio ocurrió.</p>
     <div class="hero-btns">
-      <a href="#ecosistema" class="btn-primary">Explorar ecosistema</a>
-      <a href="#metodo" class="btn-outline">Ver metodología</a>
+      <a href="#wellscore" class="btn-primary">Ver sistema completo</a>
+      <a href="#ecosistema" class="btn-outline">Explorar laboratorios</a>
     </div>
   </div>
   <div class="hero-visual">
@@ -772,6 +1092,7 @@
         <line x1="220" y1="220" x2="220" y2="390" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
         <line x1="220" y1="220" x2="50" y2="220" stroke="rgba(0,212,180,0.2)" stroke-width="1" stroke-dasharray="4,4"/>
       </svg>
+      <div class="wellscore-node">📊 WellScore</div>
       <div class="core-node"><span>The</span><span>Labs</span></div>
       <div class="satellite satellite-inner" onclick="scrollToEco('inner')"><div class="sat-icon">🧠</div>Inner<br>Labs</div>
       <div class="satellite satellite-lider" onclick="scrollToEco('lider')"><div class="sat-icon">⚡</div>Lider<br>Labs</div>
@@ -786,14 +1107,14 @@
 <!-- ECOSISTEMA -->
 <section id="ecosistema">
   <div class="section-label">Ecosistema integrado</div>
-  <h2 class="section-title">Cuatro laboratorios.<br>Un sistema de transformación.</h2>
-  <p class="section-desc">Cada laboratorio aborda un nivel distinto del desarrollo humano y organizacional. Juntos, forman un ecosistema que convierte autoconocimiento individual en capacidad colectiva.</p>
+  <h2 class="section-title">Un diagnóstico.<br>Cuatro laboratorios.<br>Un sistema de transformación.</h2>
+  <p class="section-desc">WellScore permite comprender el estado real de cultura, liderazgo y bienestar. A partir de esa evidencia, TheLabs despliega laboratorios específicos para convertir autoconocimiento individual en capacidad colectiva.</p>
 
   <div class="eco-layout">
     <div class="eco-map">
       <div class="eco-center">
-        <div class="eco-center-name">TheLabs</div>
-        <div class="eco-center-desc">Un sistema integrado de aprendizaje, autoconocimiento y transformación cultural</div>
+        <div class="eco-center-name">WellScore + TheLabs</div>
+        <div class="eco-center-desc">Diagnóstico, intervención y medición de impacto cultural en un mismo sistema</div>
       </div>
       <div class="eco-grid" id="ecoGrid">
         <div class="eco-card inner" data-lab="inner" onclick="selectLab('inner')">
@@ -832,11 +1153,141 @@
     <div class="need-selector">
       <h3>¿Qué necesidad querés abordar primero?</h3>
       <div class="need-chips">
+        <button class="need-chip" onclick="document.getElementById('wellscore').scrollIntoView({behavior:'smooth'})">Diagnosticar cultura y bienestar</button>
         <button class="need-chip" onclick="scrollToEco('inner')">Reducir reactividad individual</button>
         <button class="need-chip" onclick="scrollToEco('lider')">Fortalecer líderes en cambio</button>
         <button class="need-chip" onclick="scrollToEco('human')">Activar colaboración transversal</button>
         <button class="need-chip" onclick="scrollToEco('health')">Medir energía y desgaste</button>
         <button class="need-chip" onclick="document.getElementById('proceso').scrollIntoView({behavior:'smooth'})">Ver proceso completo</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+
+<!-- WELLSCORE -->
+<section id="wellscore">
+  <div class="section-label">Puerta de entrada del sistema</div>
+  <h2 class="section-title">WellScore mide el pulso real.<br>TheLabs convierte el diagnóstico<br>en transformación medible.</h2>
+  <p class="section-desc">WellScore funciona como la capa de evidencia del ecosistema: permite saber dónde intervenir, con qué prioridad y cómo demostrar el cambio antes, durante y después del proceso.</p>
+
+  <div class="well-hero">
+    <div class="well-panel">
+      <div class="well-title">¿Qué mide <span>WellScore</span>?</div>
+      <p class="well-copy">No mide lo que la empresa declara ser. Mide lo que las personas viven: cómo se siente la organización, cómo se expresa el liderazgo, qué nivel de seguridad psicológica existe y qué tan sostenible es el desempeño humano.</p>
+      <div class="well-quote">
+        <strong style="color:var(--well)">Idea fuerza:</strong> el diagnóstico no es el final del proceso; es el punto de partida para diseñar una intervención cultural precisa.
+      </div>
+    </div>
+
+    <div class="well-dimensions">
+      <div class="dimension-card">
+        <div class="dimension-icon">🏛️</div>
+        <div class="dimension-title">Cultura y clima</div>
+        <div class="dimension-desc">Seguridad psicológica, comunicación, pertenencia, reconocimiento, valores y propósito compartido.</div>
+      </div>
+      <div class="dimension-card">
+        <div class="dimension-icon">💚</div>
+        <div class="dimension-title">Salud y bienestar</div>
+        <div class="dimension-desc">Bienestar emocional, equilibrio vida-trabajo, recursos, demandas, sentido y motivación.</div>
+      </div>
+      <div class="dimension-card">
+        <div class="dimension-icon">🧭</div>
+        <div class="dimension-title">Liderazgo y autoliderazgo</div>
+        <div class="dimension-desc">Liderazgo emocional, liderazgo transformacional, autoliderazgo y cultura de feedback.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="measurement-grid">
+    <div class="measure-card">
+      <div class="measure-num">01</div>
+      <div class="measure-title">Encuesta WellScore</div>
+      <div class="measure-desc">48 ítems en 12 subdimensiones para construir una línea de base cuantitativa.</div>
+    </div>
+    <div class="measure-card">
+      <div class="measure-num">02</div>
+      <div class="measure-title">Entrevistas profundas</div>
+      <div class="measure-desc">Conversaciones semiestructuradas para entender el por qué detrás de los números.</div>
+    </div>
+    <div class="measure-card">
+      <div class="measure-num">03</div>
+      <div class="measure-title">Indicadores RRHH</div>
+      <div class="measure-desc">Rotación, ausentismo, conflictos, eNPS, uso de beneficios y señales de desgaste.</div>
+    </div>
+    <div class="measure-card">
+      <div class="measure-num">04</div>
+      <div class="measure-title">IA + dashboard</div>
+      <div class="measure-desc">Análisis de respuestas abiertas, patrones emergentes, riesgos y tablero ejecutivo.</div>
+    </div>
+  </div>
+
+  <div class="system-map">
+    <div class="system-header">
+      <div class="system-title">Sistema completo: diagnóstico → intervención → evidencia</div>
+      <div class="system-sub">La integración evita dos riesgos frecuentes: diagnosticar sin intervenir, o intervenir sin saber dónde está la brecha real. El sistema conecta ambas dimensiones.</div>
+    </div>
+
+    <div class="cycle-grid">
+      <div class="cycle-card">
+        <div class="cycle-step">1. MEDIR</div>
+        <div class="cycle-name">WellScore T0</div>
+        <div class="cycle-desc">Encuesta, entrevistas, indicadores y análisis con IA para establecer la línea de base.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-step">2. PRIORIZAR</div>
+        <div class="cycle-name">Mapa de brechas</div>
+        <div class="cycle-desc">Identificación de focos críticos por dimensión, área, nivel y tipo de desafío.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-step">3. TRANSFORMAR</div>
+        <div class="cycle-name">TheLabs</div>
+        <div class="cycle-desc">InnerLabs, LiderLabs, HumanLabs y HealthPulse calibrados según los hallazgos.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-step">4. SOSTENER</div>
+        <div class="cycle-name">Hábitos y pulsos</div>
+        <div class="cycle-desc">Microhábitos, rituales, conversaciones y seguimiento mensual para evitar efecto taller.</div>
+      </div>
+      <div class="cycle-card">
+        <div class="cycle-step">5. EVIDENCIAR</div>
+        <div class="cycle-name">WellScore T1/T2</div>
+        <div class="cycle-desc">Comparación post intervención y seguimiento para demostrar impacto y sostenibilidad.</div>
+      </div>
+    </div>
+
+    <div class="timeline-integrated">
+      <div class="time-card">
+        <div class="time-label">Semana 0</div>
+        <div class="time-title">Diagnóstico inicial</div>
+        <div class="time-desc">WellScore completo + entrevistas + indicadores internos.</div>
+      </div>
+      <div class="time-card">
+        <div class="time-label">Semana 2</div>
+        <div class="time-title">Devolución ejecutiva</div>
+        <div class="time-desc">Mapa de prioridades y diseño de intervención.</div>
+      </div>
+      <div class="time-card">
+        <div class="time-label">Meses 1–6</div>
+        <div class="time-title">Laboratorios TheLabs</div>
+        <div class="time-desc">Intervención por segmento, nivel y necesidad cultural.</div>
+      </div>
+      <div class="time-card">
+        <div class="time-label">Mes 3</div>
+        <div class="time-title">Pulso intermedio</div>
+        <div class="time-desc">Señales tempranas, ajustes y foco de sostenibilidad.</div>
+      </div>
+      <div class="time-card">
+        <div class="time-label">Mes 6</div>
+        <div class="time-title">Medición post</div>
+        <div class="time-desc">Comparación contra línea de base y evidencia de cambio.</div>
+      </div>
+      <div class="time-card">
+        <div class="time-label">Mes 12</div>
+        <div class="time-title">Sostenibilidad</div>
+        <div class="time-desc">Seguimiento para validar si el cambio se instaló.</div>
       </div>
     </div>
   </div>
@@ -909,44 +1360,54 @@
 
 <!-- PROCESO -->
 <section id="proceso">
-  <div class="section-label">Cómo trabajamos</div>
-  <h2 class="section-title">El proceso TheLabs</h2>
-  <p class="section-desc">Cada intervención sigue una arquitectura de siete fases que garantiza diagnóstico, diseño, experiencia e impacto medible.</p>
+  <div class="section-label">Cómo se despliega</div>
+  <h2 class="section-title">Proceso integrado<br>WellScore + TheLabs</h2>
+  <p class="section-desc">La intervención deja de ser una acción aislada y se convierte en un ciclo de gestión cultural: primero se mide, luego se interviene, después se sostiene y finalmente se demuestra impacto.</p>
   <div class="process-flow">
     <div class="flow-step">
-      <div class="flow-circle">🔍</div>
-      <div class="flow-name">Diagnosticar</div>
-      <div class="flow-desc">Comprender el desafío humano, cultural o de liderazgo</div>
+      <div class="flow-circle">📊</div>
+      <div class="flow-name">Medir</div>
+      <div class="flow-desc">WellScore T0: cultura, bienestar, liderazgo y autoliderazgo</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">🧭</div>
+      <div class="flow-name">Interpretar</div>
+      <div class="flow-desc">Mapa de brechas, focos críticos y prioridades de intervención</div>
     </div>
     <div class="flow-step">
       <div class="flow-circle">⚙️</div>
       <div class="flow-name">Diseñar</div>
-      <div class="flow-desc">Configurar el laboratorio según audiencia y objetivo</div>
-    </div>
-    <div class="flow-step">
-      <div class="flow-circle">🔋</div>
-      <div class="flow-name">Activar</div>
-      <div class="flow-desc">Instalar narrativa y predisposición al aprendizaje</div>
+      <div class="flow-desc">Selección de laboratorios según audiencia, tensión y objetivo</div>
     </div>
     <div class="flow-step">
       <div class="flow-circle">🧪</div>
-      <div class="flow-name">Experimentar</div>
-      <div class="flow-desc">Desarrollar laboratorios vivenciales con situaciones reales</div>
+      <div class="flow-name">Intervenir</div>
+      <div class="flow-desc">Experiencias TheLabs: Inner, Lider, Human y HealthPulse</div>
     </div>
     <div class="flow-step">
-      <div class="flow-circle">🔗</div>
-      <div class="flow-name">Integrar</div>
-      <div class="flow-desc">Traducir aprendizajes en hábitos y acciones observables</div>
+      <div class="flow-circle">🔁</div>
+      <div class="flow-name">Sostener</div>
+      <div class="flow-desc">Microhábitos, rituales, pulsos y comunidades de práctica</div>
     </div>
     <div class="flow-step">
-      <div class="flow-circle">📊</div>
-      <div class="flow-name">Medir</div>
-      <div class="flow-desc">Evaluar impacto en percepción, comportamiento y resultados</div>
+      <div class="flow-circle">📈</div>
+      <div class="flow-name">Evidenciar</div>
+      <div class="flow-desc">WellScore T1/T2, indicadores RRHH y narrativa de ROI cultural</div>
     </div>
-    <div class="flow-step">
-      <div class="flow-circle">🚀</div>
-      <div class="flow-name">Escalar</div>
-      <div class="flow-desc">Convertir aprendizajes individuales en capacidad colectiva</div>
+  </div>
+
+  <div class="evidence-board">
+    <div class="evidence-card">
+      <h4>Salida 1: diagnóstico ejecutivo</h4>
+      <p>Foto inicial del estado cultural, emocional y de liderazgo de la organización, con prioridades claras de intervención.</p>
+    </div>
+    <div class="evidence-card">
+      <h4>Salida 2: intervención calibrada</h4>
+      <p>Laboratorios diseñados sobre la necesidad real: autoconocimiento, liderazgo, cultura transversal o bienestar sostenible.</p>
+    </div>
+    <div class="evidence-card">
+      <h4>Salida 3: impacto demostrado</h4>
+      <p>Comparación antes-después, indicadores de adopción, hallazgos cualitativos e impacto para dirección.</p>
     </div>
   </div>
 </section>
@@ -955,8 +1416,28 @@
 
 <!-- SOLUCIONES -->
 <section id="soluciones">
-  <div class="section-label">Las cuatro soluciones</div>
-  <h2 class="section-title">Cada laboratorio,<br>un nivel de transformación.</h2>
+  <div class="section-label">Portafolio integrado</div>
+  <h2 class="section-title">Diagnóstico + laboratorios.<br>Un sistema completo de intervención.</h2>
+  <div class="solutions-grid">
+    <div class="sol-card wellscore">
+      <div class="sol-stripe"></div>
+      <div class="sol-icon">📊</div>
+      <div class="sol-name">WellScore</div>
+      <div class="sol-tagline">El diagnóstico que revela qué vive realmente la organización antes de intervenir.</div>
+      <div class="sol-meta">
+        <div class="sol-meta-item"><label>Para quién</label><p>Dirección, RRHH, sponsors de cultura, comités de transformación y organizaciones que necesitan evidencia.</p></div>
+        <div class="sol-meta-item"><label>Formatos</label><p>Diagnóstico puntual · Sistema continuo · Dashboard ejecutivo · Medición T0/T1/T2.</p></div>
+      </div>
+      <div class="sol-results">
+        <span class="sol-result-tag">Cultura y clima</span>
+        <span class="sol-result-tag">Salud y bienestar</span>
+        <span class="sol-result-tag">Liderazgo</span>
+        <span class="sol-result-tag">Indicadores RRHH</span>
+        <span class="sol-result-tag">IA y dashboard</span>
+      </div>
+      <button class="sol-btn" onclick="document.getElementById('wellscore').scrollIntoView({behavior:'smooth'})">Ver diagnóstico →</button>
+    </div>
+  </div>
   <div class="solutions-grid" id="solutionsGrid"></div>
 </section>
 
@@ -964,8 +1445,8 @@
 
 <!-- IMPACTO -->
 <section id="impacto">
-  <div class="section-label">Del aprendizaje individual a la capacidad organizacional</div>
-  <h2 class="section-title">Tres niveles de impacto</h2>
+  <div class="section-label">Del diagnóstico al ROI cultural</div>
+  <h2 class="section-title">Tres niveles de impacto medible</h2>
   <div class="impact-levels">
     <div class="impact-card">
       <div class="impact-level" style="color:var(--inner);">Nivel 1 — Persona</div>
@@ -1002,20 +1483,20 @@
   <div style="margin-top:2.5rem;">
     <div class="section-label">Indicadores que medimos</div>
     <div class="indicators-grid">
-      <div class="indicator"><div class="indicator-icon">📈</div><div class="indicator-label">NPS de experiencia</div></div>
-      <div class="indicator"><div class="indicator-icon">🧭</div><div class="indicator-label">Nivel de autoconciencia percibida</div></div>
+      <div class="indicator"><div class="indicator-icon">🏛️</div><div class="indicator-label">Delta cultura y clima</div></div>
+      <div class="indicator"><div class="indicator-icon">💚</div><div class="indicator-label">Delta salud y bienestar</div></div>
+      <div class="indicator"><div class="indicator-icon">🧭</div><div class="indicator-label">Delta liderazgo y autoliderazgo</div></div>
+      <div class="indicator"><div class="indicator-icon">📈</div><div class="indicator-label">eNPS / experiencia</div></div>
       <div class="indicator"><div class="indicator-icon">⬇️</div><div class="indicator-label">Reducción de reactividad declarada</div></div>
       <div class="indicator"><div class="indicator-icon">💬</div><div class="indicator-label">Calidad de conversaciones</div></div>
-      <div class="indicator"><div class="indicator-icon">🤝</div><div class="indicator-label">Nivel de confianza del equipo</div></div>
       <div class="indicator"><div class="indicator-icon">🔄</div><div class="indicator-label">Adopción de hábitos</div></div>
-      <div class="indicator"><div class="indicator-icon">💚</div><div class="indicator-label">Pulso de bienestar</div></div>
-      <div class="indicator"><div class="indicator-icon">🌐</div><div class="indicator-label">Indicadores de colaboración</div></div>
+      <div class="indicator"><div class="indicator-icon">📊</div><div class="indicator-label">Indicadores duros RRHH</div></div>
     </div>
     <div class="data-board" aria-label="Sistema de medición TheLabs">
-      <div class="data-card"><div class="data-value">01</div><div class="data-label">Pulso previo: percepción, energía, foco y tensión dominante.</div></div>
-      <div class="data-card"><div class="data-value">02</div><div class="data-label">Evidencia conductual: compromisos, prácticas y cambios observables.</div></div>
-      <div class="data-card"><div class="data-value">03</div><div class="data-label">Seguimiento: adopción de hábitos, calidad conversacional y aprendizaje aplicado.</div></div>
-      <div class="data-card"><div class="data-value">04</div><div class="data-label">Escalabilidad: aprendizajes convertidos en lenguaje común y rituales culturales.</div></div>
+      <div class="data-card"><div class="data-value">T0</div><div class="data-label">Línea de base: cultura, bienestar, liderazgo, relatos e indicadores.</div></div>
+      <div class="data-card"><div class="data-value">T1</div><div class="data-label">Medición post: comparación contra punto de partida y brechas cerradas.</div></div>
+      <div class="data-card"><div class="data-value">T2</div><div class="data-label">Sostenibilidad: cambio instalado, hábitos activos y señales de permanencia.</div></div>
+      <div class="data-card"><div class="data-value">ROI</div><div class="data-label">Narrativa ejecutiva: qué cambió, dónde impactó y qué decisión habilita.</div></div>
     </div>
   </div>
 </section>
@@ -1024,11 +1505,11 @@
 
 <!-- DIFERENCIAL -->
 <section id="diferencial">
-  <div class="section-label">Por qué TheLabs</div>
-  <h2 class="section-title">No es capacitación tradicional.<br>Es transformación experiencial.</h2>
+  <div class="section-label">Por qué WellScore + TheLabs</div>
+  <h2 class="section-title">No es capacitación tradicional.<br>Es gestión cultural con evidencia.</h2>
   <div class="diff-table">
     <div class="diff-col diff-col-trad">
-      <div class="diff-header">Capacitación tradicional</div>
+      <div class="diff-header">Formación tradicional</div>
       <div class="diff-row">Transmite contenido</div>
       <div class="diff-row">Se enfoca en teoría</div>
       <div class="diff-row">Termina en el aula</div>
@@ -1038,7 +1519,8 @@
     </div>
     <div class="diff-vs"><span>VS</span></div>
     <div class="diff-col diff-col-thelabs">
-      <div class="diff-header">TheLabs</div>
+      <div class="diff-header">WellScore + TheLabs</div>
+      <div class="diff-row">Diagnostica antes de intervenir</div>
       <div class="diff-row">Transforma comportamiento</div>
       <div class="diff-row">Trabaja sobre casos reales</div>
       <div class="diff-row">Continúa en hábitos</div>
@@ -1048,8 +1530,8 @@
     </div>
   </div>
   <div class="diff-quote">
-    El valor de TheLabs no está en lo que las personas escuchan,<br>
-    sino en lo que <strong>empiezan a hacer distinto</strong>.
+    El valor del sistema no está solo en medir ni en capacitar,<br>
+    sino en convertir evidencia en <strong>cambios observables y sostenibles</strong>.
   </div>
 </section>
 
@@ -1058,14 +1540,14 @@
 <!-- CONTACTO -->
 <section id="contacto">
   <div class="section-label">Empecemos</div>
-  <h2 class="section-title">Diseñemos el laboratorio<br>que tu organización necesita</h2>
+  <h2 class="section-title">Diagnostiquemos el pulso real<br>y diseñemos la intervención correcta</h2>
   <div class="contact-grid">
     <div class="contact-info">
-      <p>Cada organización tiene un desafío humano distinto. TheLabs permite diseñar experiencias específicas para activar conciencia, fortalecer liderazgo, cuidar la energía y acelerar cambios culturales.</p>
-      <p style="font-size:0.85rem; color: var(--faint);">La cultura no cambia por discurso; cambia por experiencias repetidas. No desarrollamos habilidades blandas. Entrenamos capacidades humanas críticas.</p>
+      <p>Cada organización tiene un desafío humano distinto. El sistema WellScore + TheLabs permite identificar dónde está la brecha real y luego diseñar experiencias específicas para activar conciencia, fortalecer liderazgo, cuidar la energía y acelerar cambios culturales.</p>
+      <p style="font-size:0.85rem; color: var(--faint);">La cultura no cambia por discurso; cambia por experiencias repetidas y decisiones basadas en evidencia. Primero medimos el pulso real. Después intervenimos donde más impacto puede generarse.</p>
       <div class="contact-btns">
-        <a href="#contacto" class="btn-primary">Quiero conocer más</a>
-        <a href="#contacto" class="btn-outline">Solicitar diagnóstico</a>
+        <a href="#contacto" class="btn-primary">Quiero conocer el sistema</a>
+        <a href="#contacto" class="btn-outline">Solicitar WellScore</a>
       </div>
     </div>
     <div class="contact-form">
@@ -1098,6 +1580,8 @@
           <label>Solución de interés</label>
           <select>
             <option value="">Seleccionar...</option>
+            <option>WellScore — Diagnóstico organizacional</option>
+            <option>Sistema completo WellScore + TheLabs</option>
             <option>InnerLabs — Autoconocimiento</option>
             <option>LiderLabs — Liderazgo</option>
             <option>HumanLabs — Cultura</option>
@@ -1105,7 +1589,7 @@
             <option>No sé aún / quiero diagnóstico</option>
           </select>
         </div>
-        <button type="submit" class="form-submit">Diseñar una experiencia →</button>
+        <button type="submit" class="form-submit">Solicitar diagnóstico →</button>
       </form>
       <div class="form-success" id="formSuccess">
         <div style="font-size:2rem; margin-bottom:0.75rem;">✓</div>
@@ -1115,12 +1599,12 @@
   </div>
 </section>
 
-<a href="#contacto" class="sticky-cta">Diseñar experiencia →</a>
+<a href="#contacto" class="sticky-cta">Solicitar diagnóstico →</a>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">The<span>Labs</span></div>
-  <div class="footer-copy">© 2026 TheLabs. Ecosistema de transformación humana.</div>
+  <div class="footer-copy">© 2026 TheLabs. Sistema de transformación cultural medible.</div>
 </footer>
 
 <script>
@@ -1142,7 +1626,8 @@ const labs = {
     results: ["Autoconciencia", "Gestión emocional", "Autoliderazgo", "Reducción de reactividad", "Plan de acción personal"],
     metrics: ["Autoconciencia percibida", "Reducción de reactividad", "Calidad de decisiones", "Cumplimiento de plan personal"],
     useCases: ["Equipos bajo presión operativa", "Jóvenes talentos", "Procesos de cambio", "Profesionales técnicos con alta exigencia"],
-    experience: "Activación asincrónica, laboratorio vivencial y plan de hábitos individuales con seguimiento."
+    experience: "Activación asincrónica, laboratorio vivencial y plan de hábitos individuales con seguimiento.",
+    wellscoreTrigger: "Se activa cuando WellScore muestra brechas en autoliderazgo, seguridad psicológica, bienestar emocional o alta reactividad bajo presión."
   },
   lider: {
     name: "LiderLabs",
@@ -1160,7 +1645,8 @@ const labs = {
     results: ["Mejores conversaciones", "Decisiones más conscientes", "Liderazgo habilitador", "Gestión de cambio", "Mayor madurez de equipo"],
     metrics: ["Calidad conversacional", "Velocidad de decisión", "Confianza del equipo", "Madurez de liderazgo"],
     useCases: ["Mandos medios en transición", "Sponsors de cambio", "Comités ejecutivos", "Líderes con equipos críticos"],
-    experience: "Laboratorios ejecutivos con casos reales, conversaciones críticas y prácticas de liderazgo habilitador."
+    experience: "Laboratorios ejecutivos con casos reales, conversaciones críticas y prácticas de liderazgo habilitador.",
+    wellscoreTrigger: "Se activa cuando WellScore evidencia brechas en liderazgo emocional, feedback, comunicación, confianza o gestión del cambio."
   },
   human: {
     name: "HumanLabs",
@@ -1178,7 +1664,8 @@ const labs = {
     results: ["Lenguaje común", "Colaboración transversal", "Hábitos culturales", "Mayor apropiación del cambio", "Identidad compartida"],
     metrics: ["Adopción de lenguaje común", "Colaboración transversal", "Participación activa", "Rituales culturales instalados"],
     useCases: ["Transformación cultural", "Lanzamiento de valores", "Comunidades internas", "Integración post-cambio"],
-    experience: "Experiencias colectivas, rituales de aprendizaje y laboratorios grupales para instalar hábitos culturales."
+    experience: "Experiencias colectivas, rituales de aprendizaje y laboratorios grupales para instalar hábitos culturales.",
+    wellscoreTrigger: "Se activa cuando WellScore muestra fragmentación cultural, baja pertenencia, silos o distancia entre valores declarados y comportamientos cotidianos."
   },
   health: {
     name: "HealthPulse",
@@ -1196,7 +1683,8 @@ const labs = {
     results: ["Mapa de bienestar", "Reducción de desgaste", "Mayor conciencia colectiva", "Prácticas de regulación", "Sostenibilidad del desempeño"],
     metrics: ["Pulso de bienestar", "Nivel de energía", "Factores de desgaste", "Prácticas de recuperación"],
     useCases: ["Equipos con fatiga", "Áreas críticas", "Transformaciones intensas", "Prevención de burnout"],
-    experience: "Diagnóstico de energía, laboratorios de regulación y tablero de seguimiento para sostener desempeño."
+    experience: "Diagnóstico de energía, laboratorios de regulación y tablero de seguimiento para sostener desempeño.",
+    wellscoreTrigger: "Se activa cuando WellScore detecta señales de desgaste, estrés, desequilibrio vida-trabajo, baja energía o riesgo de burnout."
   }
 };
 
@@ -1229,12 +1717,14 @@ function selectLab(key) {
 
   const metricsHTML = (lab.metrics || []).map(m => `<span class="detail-pill">${m}</span>`).join('');
   const useCasesHTML = (lab.useCases || []).map(u => `<span class="detail-pill">${u}</span>`).join('');
+  const triggerHTML = lab.wellscoreTrigger ? `<div class="well-trigger"><strong>Cómo se activa desde WellScore:</strong> ${lab.wellscoreTrigger}</div>` : '';
 
   content.innerHTML = `
     <span class="detail-badge" style="background:${lab.colorDim}; color:${lab.color}">${lab.category}</span>
     <div class="detail-name">${lab.icon} ${lab.name}</div>
     <div class="detail-purpose">${lab.purpose}</div>
     <div class="detail-hero-line"><strong style="color:${lab.color}">Experiencia:</strong> ${lab.experience || lab.tagline}</div>
+    ${triggerHTML}
 
     <div class="detail-section-title" style="color:${lab.color}">Problemas que aborda</div>
     <div class="detail-pills">${problemsHTML}</div>
